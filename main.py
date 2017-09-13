@@ -1,14 +1,24 @@
 import kivy
 
-kivy.require('1.8.0')
-
 from kivy.app import App
 from kivy.uix.boxlayout import BoxLayout
+from kivy.lang import Builder
+from kivy.uix.screenmanager import ScreenManager, Screen
 
-class BoxLayoutApp(App):
+class MainScreen(Screen):
+    pass
+
+class ProjectScreen(Screen):
+    pass
+
+class ScreenManagement(ScreenManager):
+    pass
+
+presentation = Builder.load_file("main.kv")
+
+class MainApp(App):
     def build(self):
-        return BoxLayout()
+        return presentation
 
-blApp = BoxLayoutApp()
-
-blApp.run()
+ConfiguratorApp = MainApp()
+ConfiguratorApp.run()

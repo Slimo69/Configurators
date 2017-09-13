@@ -1,0 +1,37 @@
+#:import FadeTransition kivy.uix.screenmanager.FadeTransition
+
+ScreenManagement:
+    transition: FadeTransition()
+    MainScreen:
+    ProjectScreen:
+	
+<MainScreen>:
+    name: 'main'
+
+    BoxLayout:
+        orientation: "vertical"
+        spacing:10
+        padding:10
+
+        Button:
+            on_press: app.root.current = 'project'
+            text: 'Project Specification'
+        Button:
+            text: 'Project Scope'
+            
+<ProjectScreen>:
+    name: 'project'
+
+    BoxLayout:
+        orientation: "vertical"
+        spacing:10
+        padding:10
+
+        Label:
+            text: "Project Name"
+
+       Tex
+
+        Button:
+            on_release: app.root.current = 'main'
+            text: 'Back'
