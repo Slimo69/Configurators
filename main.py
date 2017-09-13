@@ -22,3 +22,5 @@ class MainApp(App):
 
 ConfiguratorApp = MainApp()
 ConfiguratorApp.run()
+
+# testovaci koment
