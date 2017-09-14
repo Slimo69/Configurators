@@ -22,15 +22,16 @@ ScreenManagement:
 <ProjectScreen>:
     name: 'project'
 
-    BoxLayout:
-        orientation: "vertical"
-        spacing:10
-        padding:10
+    GridLayout:
+        cols: 2
 
         Label:
             text: "Project Name"
 
-       Tex
+        TextInput:
+            multiline: False
+            text: ""
+            hint_text: "Please specify project name"
 
         Button:
             on_release: app.root.current = 'main'
