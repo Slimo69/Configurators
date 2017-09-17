@@ -29,6 +29,7 @@ ScreenManagement:
             text: "Project Name"
 
         TextInput:
+            id: project_name
             multiline: False
             text: ""
             hint_text: "Please specify project name"
@@ -37,3 +38,6 @@ ScreenManagement:
             on_release: app.root.current = 'main'
             text: 'Back'
 
+        Button:
+            text: 'Process'
+            on_press: root.printtxt(project_name.text)

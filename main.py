@@ -1,8 +1,5 @@
-import kivy
-import classes
-
+from classes import Project
 from kivy.app import App
-from kivy.uix.boxlayout import BoxLayout
 from kivy.lang import Builder
 from kivy.uix.screenmanager import ScreenManager, Screen
 
@@ -10,7 +7,9 @@ class MainScreen(Screen):
     pass
 
 class ProjectScreen(Screen):
-    pass
+    def printtxt(self, text):
+        projects = Project(text)
+        print projects.name
 
 class ScreenManagement(ScreenManager):
     pass
