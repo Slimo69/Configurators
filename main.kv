@@ -58,14 +58,14 @@ ScreenManagement:
                 text: "Altitude over 1000 m.a.s.l"
             CheckBox:
                 id: altitude_checkbox
+                on_active: root.activate_alt_slider()
 
         BoxLayout:
             orientation: "vertical"
             Label:
-                text: str(altitude_slider.value) + " mnm"
+                text: str(altitude_slider.value) + " m.a.s.l"
             Slider:
                 id: altitude_slider
-                active: False
                 value: 1100
                 min: 1100
                 max: 4000

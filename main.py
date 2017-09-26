@@ -16,6 +16,13 @@ class ProjectScreen(Screen):
 
     def load_countries(self):
         self.country_spinner.values = countries
+        self.alt_slider.disabled = True
+
+    def activate_alt_slider(self):
+        if self.alt_checkbox.active is True:
+            self.alt_slider.disabled = False
+        else:
+            self.alt_slider.disabled = True
 
     def printtxt(self, text):
         projects = Project(text)
