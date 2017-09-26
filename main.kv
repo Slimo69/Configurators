@@ -21,18 +21,55 @@ ScreenManagement:
             
 <ProjectScreen>:
     name: 'project'
+    alt_checkbox: altitude_checkbox
+    alt_slider: altitude_slider
+    country_spinner: ctry_spinner
 
     GridLayout:
         cols: 2
 
         Label:
-            text: "Project Name"
+            text: "Project Number:"
+
+        TextInput:
+            multiline: False
+            text: "1"
+            readonly: True
+
+        Label:
+            text: "Project Name:"
 
         TextInput:
             id: project_name
             multiline: False
             text: ""
             hint_text: "Please specify project name"
+
+        Label:
+            text: "Site Country:"
+
+        Spinner:
+            id: ctry_spinner
+            text: "Country"
+            self: root.load_countries()
+
+        BoxLayout:
+            Label:
+                text: "Altitude over 1000 m.a.s.l"
+            CheckBox:
+                id: altitude_checkbox
+
+        BoxLayout:
+            orientation: "vertical"
+            Label:
+                text: str(altitude_slider.value) + " mnm"
+            Slider:
+                id: altitude_slider
+                active: False
+                value: 1100
+                min: 1100
+                max: 4000
+                step: 100
 
         Button:
             on_release: app.root.current = 'main'
