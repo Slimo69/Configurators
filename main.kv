@@ -24,6 +24,9 @@ ScreenManagement:
     alt_checkbox: altitude_checkbox
     alt_slider: altitude_slider
     country_spinner: ctry_spinner
+    project_name : prj_name
+    project_currency : prj_currency
+
 
     GridLayout:
         cols: 2
@@ -40,7 +43,7 @@ ScreenManagement:
             text: "Project Name:"
 
         TextInput:
-            id: project_name
+            id: prj_name
             multiline: False
             text: ""
             hint_text: "Please specify project name"
@@ -66,10 +69,19 @@ ScreenManagement:
                 text: str(altitude_slider.value) + " m.a.s.l"
             Slider:
                 id: altitude_slider
-                value: 1100
-                min: 1100
+                value: 1000
+                min: 1000
                 max: 4000
                 step: 100
+
+        Label:
+            text: "Currency:"
+
+        Spinner:
+            id: prj_currency
+            text: "EUR"
+            values: ("EUR", "USD")
+
 
         Button:
             on_release: app.root.current = 'main'
@@ -77,4 +89,4 @@ ScreenManagement:
 
         Button:
             text: 'Process'
-            on_press: root.printtxt(project_name.text)
+            on_press: root.create_project()
