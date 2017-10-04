@@ -4,6 +4,7 @@ ScreenManagement:
     transition: FadeTransition()
     MainScreen:
     ProjectScreen:
+    ScopeScreen:
 	
 <MainScreen>:
     name: 'main'
@@ -17,10 +18,13 @@ ScreenManagement:
             on_press: app.root.current = 'project'
             text: 'Project Specification'
         Button:
+            on_press: app.root.current = 'scope'
             text: 'Project Scope'
+
             
 <ProjectScreen>:
     name: 'project'
+    project_id : last_id
     alt_checkbox: altitude_checkbox
     alt_slider: altitude_slider
     country_spinner: ctry_spinner
@@ -35,9 +39,10 @@ ScreenManagement:
             text: "Project Number:"
 
         TextInput:
+            id: last_id
             multiline: False
-            text: "1"
             readonly: True
+            self: root.last_id()
 
         Label:
             text: "Project Name:"
@@ -90,3 +95,17 @@ ScreenManagement:
         Button:
             text: 'Process'
             on_press: root.create_project()
+            on_release: app.root.current = 'main'
+
+<ScopeScreen>:
+    name: 'scope'
+
+    GridLayout:
+        cols: 2
+
+        Button:
+            on_release: app.root.current = 'main'
+            text: 'Back'
+
+        Button:
+            text: 'Process'
