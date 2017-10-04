@@ -1,12 +1,12 @@
-from classes import Project
+import sqlite3 as lite
+
+import pycountry
 from kivy.app import App
 from kivy.lang import Builder
-from kivy.uix.screenmanager import ScreenManager, Screen
 from kivy.properties import ObjectProperty
-from kivy.uix.popup import Popup
 from kivy.uix.label import Label
-import sqlite3 as lite
-import pycountry
+from kivy.uix.popup import Popup
+from kivy.uix.screenmanager import ScreenManager, Screen
 
 try:
     conn = lite.connect('confirgurators.sqlite')
@@ -18,8 +18,6 @@ countries = []
 for i in range(0,len(pycountry.countries)):
     ctry = list(pycountry.countries)[i]
     countries.append(ctry.name)
-
-#countries = ("Czechia", "Slovakia")
 
 class MainScreen(Screen):
     pass
