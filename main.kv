@@ -2,24 +2,49 @@
 
 ScreenManagement:
     transition: FadeTransition()
+    main_scrn: main_screen
     MainScreen:
+        id: main_screen
     ProjectScreen:
     ScopeScreen:
+    SwitchgearScreen:
 	
 <MainScreen>:
     name: 'main'
-
+    scope_button : scope_bttn
+    mv_swg_button : mv_swg_bttn
     BoxLayout:
         orientation: "vertical"
         spacing:10
         padding:10
 
         Button:
-            on_press: app.root.current = 'project'
             text: 'Project Specification'
+            on_press: root.manager.current = 'project'
+
         Button:
-            on_press: app.root.current = 'scope'
             text: 'Project Scope'
+            disabled: True
+            id: scope_bttn
+            on_press: root.manager.current = 'scope'
+
+        Button:
+            text: 'HV/MV Transformers Specification'
+            disabled: True
+
+        Button:
+            text: 'MV Switchgear Specification'
+            disabled: True
+            id: mv_swg_bttn
+            on_release: root.manager.current = 'mv_swgr'
+
+        Button:
+            text: 'MV/LV Transformer Specification'
+            disabled: True
+
+        Button:
+            text: 'LV Switchgear Specification'
+            disabled: True
 
             
 <ProjectScreen>:
@@ -34,6 +59,8 @@ ScreenManagement:
 
     GridLayout:
         cols: 2
+        spacing:10
+        padding:10
 
         Label:
             text: "Project Number:"
@@ -62,6 +89,9 @@ ScreenManagement:
             self: root.load_countries()
 
         BoxLayout:
+            spacing:10
+            padding:10
+
             Label:
                 text: "Altitude over 1000 m.a.s.l"
             CheckBox:
@@ -70,6 +100,9 @@ ScreenManagement:
 
         BoxLayout:
             orientation: "vertical"
+            spacing:10
+            padding:10
+
             Label:
                 text: str(altitude_slider.value) + " m.a.s.l"
             Slider:
@@ -89,35 +122,43 @@ ScreenManagement:
 
 
         Button:
-            on_release: app.root.current = 'main'
+            on_release: root.manager.current = 'main'
             text: 'Back'
 
         Button:
             text: 'Process'
-            on_press: root.create_project()
-            on_release: app.root.current = 'main'
+            on_press: root.create_project(root.manager)
+            on_release: root.manager.current = 'main'
 
 <ScopeScreen>:
     name: 'scope'
+    mv_swithcgear_cb: mv_swg_cb
 
     GridLayout:
         cols: 2
+        spacing:10
+        padding:10
 
         Label:
             text: "HV to MV transformers"
         CheckBox:
+            id: hv_trans_cb
+            disabled: True
 
         Label:
             text: "MV switchgears"
         CheckBox:
+            id:mv_swg_cb
 
         Label:
             text: "MV to LV transformers"
         CheckBox:
+            disabled: True
 
         Label:
             text: "LV switchgear"
         CheckBox:
+            disabled: True
 
 
 
@@ -127,3 +168,16 @@ ScreenManagement:
 
         Button:
             text: 'Process'
+            on_press: root.create_products(root.manager)
+            on_release: root.manager.current = 'mv_swgr'
+
+<SwitchgearScreen>:
+    name: 'mv_swgr'
+
+    BoxLayout:
+        spacing:10
+        padding:10
+
+        Button:
+            on_release: root.manager.current = 'main'
+            text: 'Back'

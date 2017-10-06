@@ -15,12 +15,15 @@ except:
     print ("DB connection failed")
 
 countries = []
+
 for i in range(0,len(pycountry.countries)):
     ctry = list(pycountry.countries)[i]
     countries.append(ctry.name)
 
 class MainScreen(Screen):
-    pass
+    scope_button = ObjectProperty(None)
+    mv_swg_button = ObjectProperty(None)
+
 
 class ProjectScreen(Screen):
     project_id = ObjectProperty()
@@ -45,7 +48,7 @@ class ProjectScreen(Screen):
         else:
             self.alt_slider.disabled = True
 
-    def create_project(self):
+    def create_project(self, root_manager):
         if str(self.country_spinner.text) == "Country":
             popup = Popup(title='Warning', content=Label(text='Please select a country!'))
             popup.open()
@@ -55,16 +58,23 @@ class ProjectScreen(Screen):
                             (self.project_name.text, self.country_spinner.text, self.alt_slider.value,
                             self.project_currency.text))
                 conn.commit()
+                root_manager.main_scrn.scope_button.disabled = False
             else:
                 cur.execute("INSERT INTO projects (project_name, country, altitude, currency) VALUES (?, ?, ?, ?)",
                             (self.project_name.text, self.country_spinner.text, 1000,self.project_currency.text))
                 conn.commit()
+                root_manager.main_scrn.scope_button.disabled = False
 
 class ScopeScreen(Screen):
+    mv_switchgear_cb = ObjectProperty(None)
+    def create_products(self,root_manager):
+        root_manager.main_scrn.mv_swg_button.disabled = False
+
+class SwitchgearScreen(Screen):
     pass
 
 class ScreenManagement(ScreenManager):
-    pass
+    main_scrn = ObjectProperty(None)
 
 presentation = Builder.load_file("main.kv")
 
